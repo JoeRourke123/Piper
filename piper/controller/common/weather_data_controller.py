@@ -6,6 +6,7 @@ from kink import inject
 from piper.controller import PeriodicController
 from piper.state.common.notion_config_state import NotionConfigState
 from piper.state.common.weather_data_state import WeatherDataState
+from piper.util.weather_util import WeatherResponseUtil
 
 
 @inject
@@ -17,11 +18,12 @@ class WeatherDataController(PeriodicController):
 
     def periodic_update(self):
         weather_endpoint = self.notion_config.get_config("weather_endpoint_url")
-
         weather_response = requests.get(weather_endpoint).json()
 
-        self.weather_data.temperature = round(weather_response["current"]["temperature_2m"])
-        self.weather_data.conditions = "clear"
+        weather_util = WeatherResponseUtil(weather_response)
+
+        self.weather_data.temperature = weather_util.temperature
+        self.weather_data.conditions = weather_util.weather_type
 
     @property
     def update_every(self) -> timedelta:
