@@ -30,6 +30,14 @@ class WeatherResponseUtil(object):
         return parse(self.response["daily"]["sunset"][0])
 
     @property
+    def max_temperature(self) -> int:
+        return round(self.response["daily"]["temperature_2m_max"][0])
+
+    @property
+    def min_temperature(self) -> int:
+        return round(self.response["daily"]["temperature_2m_min"][0])
+
+    @property
     def weather_type(self) -> WeatherType:
         weather_code_max_values = [0, 3, 48, 57, 67, 77, 86, 99]
         weather_code = self.response["current"]["weather_code"]
