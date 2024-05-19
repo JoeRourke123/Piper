@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "piper"
+version = "0.1.0"
+description = ""
+authors = ["Joe Rourke <jrourke@expediagroup.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+raylib-dynamic = "^5.0.0.1"
+requests = "^2.31.0"
+spotipy = "^2.23.0"
+notion-client = "^2.2.1"
+kink = "^0.8.0"
+python-dateutil = "^2.9.0.post0"
+
+[tool.poetry.scripts]
+piper = "piper:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
