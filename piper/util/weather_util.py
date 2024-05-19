@@ -1,14 +1,20 @@
+from datetime import datetime
 from enum import Enum
+
+from dateutil.parser import parse
 
 
 class WeatherType(Enum):
     CLEAR = 0
-    LIGHT_CLOUDS = 1
-    LIGHT_RAIN = 2
-    RAIN = 3
-    SNOW = 4
-    SHOWERS = 5
-    STORM = 6
+    FOG = 1
+    LIGHT_CLOUDS = 2
+    LIGHT_RAIN = 3
+    RAIN = 4
+    SNOW = 5
+    SHOWERS = 6
+    STORM = 7
+    CLOUD = 8
+    CLEAR_NIGHT = 9
 
 
 class WeatherResponseUtil(object):
@@ -20,12 +26,21 @@ class WeatherResponseUtil(object):
         return round(self.response["current"]["temperature_2m"])
 
     @property
+    def sunset(self) -> datetime:
+        return parse(self.response["daily"]["sunset"][0])
+
+    @property
     def weather_type(self) -> WeatherType:
         weather_code_max_values = [0, 3, 48, 57, 67, 77, 86, 99]
         weather_code = self.response["current"]["weather_code"]
 
         for category_index, weather_code_category in enumerate(weather_code_max_values):
             if weather_code <= weather_code_category:
-                return WeatherType(weather_code)
+                weather_type = WeatherType(category_index)
 
-        return WeatherType.CLEAR
+                if self.sunset < datetime.now() and weather_type == WeatherType.CLEAR:
+                    return WeatherType.CLEAR_NIGHT
+
+                return weather_type
+
+        return WeatherType.CLOUD
