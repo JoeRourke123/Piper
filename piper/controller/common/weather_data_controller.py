@@ -24,6 +24,8 @@ class WeatherDataController(PeriodicController):
 
         self.weather_data.temperature = weather_util.temperature
         self.weather_data.conditions = weather_util.weather_type
+        self.weather_data.min_temperature = weather_util.min_temperature
+        self.weather_data.max_temperature = weather_util.max_temperature
 
     @property
     def update_every(self) -> timedelta:
