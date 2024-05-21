@@ -19,6 +19,10 @@ class WeatherCardInfo(Component):
         self.font_config = font_config
         self.texture_config = texture_config
 
+    @staticmethod
+    def build() -> ['Component']:
+        return [WeatherCardInfo()]
+
     def draw_component(self):
         weather_conditions_texture = self.texture_config.weather_icon(self.weather_data.conditions)
 

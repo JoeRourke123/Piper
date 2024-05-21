@@ -12,6 +12,11 @@ class Component(View, Controller, ABC):
     def draw_component(self):
         pass
 
+    @staticmethod
+    @abstractmethod
+    def build() -> ['Component']:
+        pass
+
     def draw(self):
         self.update()
         self.draw_component()

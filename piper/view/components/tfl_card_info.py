@@ -17,6 +17,10 @@ class TflCardInfo(Component):
         self.arrivals_string = "No services"
         self.arrivals_position = Vector2(240, 210)
 
+    @staticmethod
+    def build() -> ['Component']:
+        return [TflCardInfo()]
+
     def draw_component(self):
         tfl_texture = self.texture_config.tfl_icon
 

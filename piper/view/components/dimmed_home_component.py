@@ -25,3 +25,7 @@ class DimmedHomeComponent(ClickableComponent):
         font = self.font_config.gogh
         draw_text_ex(font, self.home_state.hour, Vector2(30, 40), 150, 0, WHITE)
         draw_text_ex(font, self.home_state.minute, Vector2(30, 130), 150, 0, WHITE)
+
+    @staticmethod
+    def build():
+        return [DimmedHomeComponent()]

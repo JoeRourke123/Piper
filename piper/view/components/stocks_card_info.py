@@ -12,6 +12,10 @@ class StocksCardInfo(Component):
         self.font_config = font_config
         self.texture_config = texture_config
 
+    @staticmethod
+    def build() -> ['Component']:
+        return [StocksCardInfo()]
+
     def draw_component(self):
         draw_text_ex(self.font_config.gogh, "STOCKS", Vector2(240, 210), 40, 0, GREEN)
 
