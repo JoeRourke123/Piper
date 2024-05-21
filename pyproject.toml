@@ -13,6 +13,7 @@ spotipy = "^2.23.0"
 notion-client = "^2.2.1"
 kink = "^0.8.0"
 python-dateutil = "^2.9.0.post0"
+yeelight = "^0.7.14"
 
 [tool.poetry.scripts]
 piper = "piper:main"
